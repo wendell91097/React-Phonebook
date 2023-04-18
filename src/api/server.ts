@@ -1,9 +1,15 @@
+
 export const server_calls = {
     get: async() => {
-        const response = await fetch(`https://plankton-app-46k8b.ondigitalocean.app/api/contacts`,
+        const response = await fetch(`https://tan-tricky-grouse.glitch.me/api/contacts`,
         {
             method: 'GET',
             mode: 'cors',
+            headers: {
+                'Content-Type': 'application/json',
+                'access-control-allow-origin':	'*',
+                'x-access-token':	'Bearer de3a93a15d89efa56fb8ee059a34cebe5e5270e3900f7355',
+            },
         })   
 
         if (!response.ok){
@@ -14,12 +20,13 @@ export const server_calls = {
     },
 
     create: async (data: any = {}) => {
-        const response = await fetch(`https://plankton-app-46k8b.ondigitalocean.app/api/contacts`,
+        const response = await fetch(`https://tan-tricky-grouse.glitch.me/api/contacts`,
         {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
                 'access-control-allow-origin':	'*',
+                'x-access-token':	'Bearer de3a93a15d89efa56fb8ee059a34cebe5e5270e3900f7355',
             },
             body: JSON.stringify(data)
         })
@@ -32,12 +39,13 @@ export const server_calls = {
     },
 
     update: async (id:string, data: any = {}) => {
-        const response = await fetch(`https://plankton-app-46k8b.ondigitalocean.app/api/contacts/${id}`,
+        const response = await fetch(`https://tan-tricky-grouse.glitch.me/api/contacts/${id}`,
         {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': '*',
+                'access-control-allow-origin':	'*',
+                'x-access-token': 'Bearer de3a93a15d89efa56fb8ee059a34cebe5e5270e3900f7355',
             },
             body: JSON.stringify(data)
         })
@@ -50,11 +58,12 @@ export const server_calls = {
     },
 
     delete: async (id:string) => {
-        const response = await fetch(`https://plankton-app-46k8b.ondigitalocean.app/api/contacts/${id}`,
+        const response = await fetch(`https://tan-tricky-grouse.glitch.me/api/contacts/${id}`,
         {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
+                'access-control-allow-origin':	'*',
             }
         })
 
