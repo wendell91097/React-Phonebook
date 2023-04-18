@@ -7,7 +7,7 @@ import { useDispatch, useStore } from 'react-redux'
 import { chooseName, chooseEmail, chooseAddress, choosePhone } from '../redux/slices/rootSlice';
 
 interface ContactFormProps {
-  id?: string,
+  id?: string[],
   data?: {},
 }
 

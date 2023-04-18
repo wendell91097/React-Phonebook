@@ -64,6 +64,7 @@ export const server_calls = {
             headers: {
                 'Content-Type': 'application/json',
                 'access-control-allow-origin':	'*',
+                'x-access-token': 'Bearer de3a93a15d89efa56fb8ee059a34cebe5e5270e3900f7355',
             }
         })
 
