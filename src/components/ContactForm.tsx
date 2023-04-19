@@ -8,7 +8,6 @@ import { chooseName, chooseEmail, chooseAddress, choosePhone } from '../redux/sl
 
 interface ContactFormProps {
   id?: string[],
-  data?: {},
 }
 
 function ContactForm( props: ContactFormProps ) {
@@ -21,7 +20,7 @@ function ContactForm( props: ContactFormProps ) {
     if(props.id && props.id.length > 0) {
       server_calls.update(props.id[0], data)
       console.log(`Updated: ${data.name} , ${props.id}`)
-      setTimeout(() => {window.location.reload()}, 1000);
+      setTimeout(() => {window.location.reload()}, 500);
       event.target.reset()
     } else {
       dispatch(chooseName(data.name));
@@ -30,13 +29,12 @@ function ContactForm( props: ContactFormProps ) {
       dispatch(chooseAddress(data.address))
 
       server_calls.create(store.getState());
-      setTimeout(() => {window.location.reload()}, 1000);
+      setTimeout(() => {window.location.reload()}, 500);
     }
   }
 
   return (
 
-    // TODO finish Handle Function w/ state management
     <div>
       <form onSubmit={ handleSubmit(onSubmit) }> 
         <div>

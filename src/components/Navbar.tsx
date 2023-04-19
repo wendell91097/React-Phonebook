@@ -1,9 +1,23 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import Button from "./Button"
+import { signInWithPopup, signOut } from "firebase/auth"
+import { auth, Providers } from "../config/firebase"
 
 function Navbar() {
     const [isVisible, setIsVisible] = useState(false)
+
+    const signOutOnClick = () => {
+        signOut(auth)
+        location.reload();
+    }
+
+    const signInOnClick = async () => {
+        const response = await signInWithPopup(auth, Providers.google);
+        if ( response.user ) {
+            location.reload();
+        }
+    }
 
     const dropDown = () => {
         setIsVisible(!isVisible)
@@ -13,7 +27,7 @@ function Navbar() {
         setIsVisible(false)
     }
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-sky-500 to-indigo-500 p-6 ">
+    <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-sky-500 to-indigo-800 p-6 ">
         <div className="flex items-center flex-shrink-0 text-white mr-6 ">
             <Link to='/' className="font-semibold text-xl tracking-tight">Digit</Link>  
         </div>  
@@ -54,6 +68,27 @@ function Navbar() {
                             mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">Contact</Link>
                         </div>
                     </Button>
+                    {
+                        !auth.currentUser ?
+
+                        <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
+                            <div>
+                                <Link to="/" onClick ={ () => { signInOnClick()}} className="flex place-items-center mt-4 lg:inline-block 
+                                lg:mt-0 text-cyan-200 hover:text-white mr-4">
+                                    Sign In
+                                </Link>
+                            </div>
+                        </Button>
+                        :
+                        <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
+                            <div>
+                                <Link to="/" onClick ={ () => { signOutOnClick()}} className="flex place-items-center mt-4 lg:inline-block 
+                                lg:mt-0 text-cyan-200 hover:text-white mr-4">
+                                    Sign Out
+                                </Link>
+                            </div>
+                        </Button>
+                    }
                 </div>
             </div>
             ) : (
