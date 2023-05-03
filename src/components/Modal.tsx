@@ -1,5 +1,6 @@
 import React from 'react'
-import ContactForm from './ContactForm';
+import ReviewForm from './InfoForm';
+import ReviewFormPrivate from './InfoFormPrivate';
 
 type Props = {
     id?: string[];
@@ -14,22 +15,25 @@ const Modal = ( props: Props) => {
         onClick={props.onClose} 
         
         className='fixed w-full h-full flex overflow-auto
-        z-1 justify-center align-middle bg-gray-300 bg-opacity-25'
+        z-10 justify-center align-middle bg-gray-300 bg-opacity-30'
         >
-            <div className='max-w-600px w-2/5 fixed flex z-1 mt-20 bg-white shadow-xl rounded'
+            <div className='min-w-600px w-3/5 fixed flex z-10 my-20 bg-white shadow-xl rounded overflow-y-scroll'
             onClick={(e) => {
                 e.stopPropagation()
             }}
             >
-                <div className="w-full flex flex-col">
-                    <div className="flex flex-row space-apart">
+                <div className="justify-between flex flex-row">
+                    <div className="flex flex-col">
                         <p className="flex justify-end m-3 bg-slate-300 p-2 rounded hover:bg-slate-800 text-white"
                         onClick={props.onClose}>
                             X
                         </p>
                     </div>
-                    <div className="flex flex-col items-center text-center mt-3 p-2">
-                        <ContactForm id={ props.id }/>
+                    {/* <div className="flex items-center text-center my-3 p-1">
+                        <ReviewFormPrivate id={ props.id } />
+                    </div> */}
+                    <div className="flex items-center text-center my-3 p-1">
+                        <ReviewForm id={ props.id }/>
                     </div>
                 </div>
             </div>

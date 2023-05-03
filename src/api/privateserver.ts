@@ -2,13 +2,12 @@ import {token} from './token'
 
 export const server_calls = {
     get: async() => {
-        const response = await fetch(`https://review-keybase.glitch.me/api/reviews`,
+        const response = await fetch(`https://review-keybase.glitch.me/api/privatereviews`,
         {
             method: 'GET',
             mode: 'cors',
             headers: {
                 'Content-Type': 'application/json',
-                'access-control-allow-origin':	'*',
                 'x-access-token': `${token}`,
             },
         })   
@@ -21,12 +20,11 @@ export const server_calls = {
     },
 
     create: async (data: any = {}) => {
-        const response = await fetch(`https://review-keybase.glitch.me/api/reviews`,
+        const response = await fetch(`https://review-keybase.glitch.me/api/privatereviews`,
         {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'access-control-allow-origin':	'*',
                 'x-access-token': `${token}`,
             },
             body: JSON.stringify(data)
@@ -40,7 +38,7 @@ export const server_calls = {
     },
 
     update: async (id:string, data: any = {}) => {
-        const response = await fetch(`https://review-keybase.glitch.me/api/reviews/${id}`,
+        const response = await fetch(`https://review-keybase.glitch.me/api/privatereviews/${id}`,
         {
             method: "POST",
             headers: {
@@ -58,7 +56,7 @@ export const server_calls = {
     },
 
     delete: async (id:string) => {
-        const response = await fetch(`https://review-keybase.glitch.me/api/reviews/${id}`,
+        const response = await fetch(`https://review-keybase.glitch.me/api/privatereviews/${id}`,
         {
             method: "DELETE",
             headers: {

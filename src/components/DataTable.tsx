@@ -7,15 +7,15 @@ import { useGetData } from '../custom-hooks/FetchData';
 
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 90, hide:true},
-  { field: 'name', headerName: 'Contact Name', flex: 1},
-  { field: 'email', headerName:'Email', flex: 1},
-  { field: 'phone_number', headerName: 'Phone Number', flex: 1},
-  { field: 'address', headerName: 'Address', flex: 2}
+  { field: 'show', headerName: 'Show', flex: 1},
+  { field: 'author', headerName:'Author', flex: 1},
+  { field: 'rating', headerName: 'Rating', flex: 1},
+  { field: 'review', headerName: 'Review', flex: 2}
 ]
 
 function DataTable() {
   const [ open, setOpen ] = useState(false);
-  const { contactData, getData } = useGetData();
+  const { reviewData, getData } = useGetData();
   const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
   const handleOpen = () => {
@@ -47,7 +47,7 @@ function DataTable() {
                 <button
                 className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'
                 onClick={() => handleOpen()}>
-                    Create New Contact    
+                    Add Review   
                 
                 </button>
             </div>
@@ -57,8 +57,8 @@ function DataTable() {
         <div className={ open ? "hidden" : "container px-5 py-5 flex flex-col" }
              style={{ height: 560, width: '100%' }}
           >
-            <h2 className='p-3 bg-slate-300 my-3 rounded'>My Contacts</h2>
-            <DataGrid rows={contactData} columns={columns} rowsPerPageOptions={[5]}
+            <h2 className='p-3 bg-slate-300 my-3 rounded'>Opinions with Factual Support</h2>
+            <DataGrid rows={ reviewData } columns={columns} rowsPerPageOptions={[5]}
             checkboxSelection={true} 
             onSelectionModelChange={(item:any) => {
               setSelectionModel(item)

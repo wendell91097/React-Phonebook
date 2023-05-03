@@ -27,17 +27,16 @@ function Navbar() {
         setIsVisible(false)
     }
   return (
-    <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-sky-500 to-indigo-800 p-6 ">
+    <nav className="flex items-center justify-between flex-wrap bg-gradient-to-r from-sky-400 to-indigo-800 p-6 ">
         <div className="flex items-center flex-shrink-0 text-white mr-6 ">
-            <Link to='/' className="font-semibold text-xl tracking-tight">Digit</Link>  
+            <Link to='/' className="font-semibold text-xl tracking-tight">GR33D</Link>  
         </div>  
         <div className="block">
             <button 
                 onClick={dropDown}
-                className="flex items-cent px-3 py-2 text-teal-200 
-                border rounded border-teal-200 hover:border-white"
+                className="flex items-cent px-3 py-2 text-cyan-200 
+                border rounded border-cyan-200 hover:border-white"
                 >
-                    <button className="flex items-center "></button>
                     <i className="fas fa-bars"></i>
             </button>
         </div>
@@ -58,12 +57,6 @@ function Navbar() {
                     </Button>
                     <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
                         <div>
-                            <Link to="/dashboard" onClick={ clicked } className="flex place-items-center 
-                            mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">Dashboard</Link>
-                        </div>
-                    </Button>
-                    <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
-                        <div>
                             <Link to="/contact" onClick={ clicked } className="flex place-items-center 
                             mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">Contact</Link>
                         </div>
@@ -80,6 +73,13 @@ function Navbar() {
                             </div>
                         </Button>
                         :
+                        <>
+                        <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
+                        <div>
+                            <Link to="/dashboard" onClick={ clicked } className="flex place-items-center 
+                            mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">Dashboard</Link>
+                        </div>
+                        </Button>
                         <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
                             <div>
                                 <Link to="/" onClick ={ () => { signOutOnClick()}} className="flex place-items-center mt-4 lg:inline-block 
@@ -88,6 +88,7 @@ function Navbar() {
                                 </Link>
                             </div>
                         </Button>
+                        </>
                     }
                 </div>
             </div>
