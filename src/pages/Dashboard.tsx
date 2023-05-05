@@ -76,6 +76,7 @@ function Dashboard() {
         
       </div>
       <DataTable />
+      <div className='h-12'></div>
     </div>
    
   )

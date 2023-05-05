@@ -56,22 +56,14 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
     }))
   }
 
-//  Sends the user a random dog picture
+  const handleUnknown = () => {
+    const botMessage = createChatBotMessage("My apologies, but I don't understand you. I reply to 'hello', 'anime' or 'thanks'. And yes, I AM case sensitive- I'm not ashamed to admit it.")
 
-  const handleDog = () => {
-    const botMessage = createChatBotMessage(
-      "Here's a dog picture for you.",
-      {
-        widget: 'dogPicture',
-      }
-    );
-    
     setState((prev) => ({
       ...prev,
-      messages: [...prev.messages, botMessage],
+      messages: [...prev.messages, botMessage]
     }))
-    
-  };
+  }
 
 // Async function to retrieve an anime quote
 
@@ -115,7 +107,8 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleHello,
             handleThanks,
             handleEmpty,
-            handleDog,
+            handleUnknown,
+            // handleDog,
             handleAnime,
           },
         });

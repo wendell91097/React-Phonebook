@@ -5,7 +5,7 @@ import ReactLogo from "../assets/svg/ReactLogo.svg"
 function About() {
     return (
     
-        <div className="bg-gradient-to-b from from-sky-50 to-fuchsia-300 min-h-screen text-center">
+        <div className="bg-gradient-to-b from from-sky-50 to-sky-200 min-h-screen text-center">
           <p className="text-xl pt-16 pb-8 p-2 ml-2 hover:font-semibold">
           <span className="font-semibold text-center">GR33D</span> is made with modern technologies like React, Vite, 
            TypeScript, and Firebase for authentication while using Flask for the backend API. 

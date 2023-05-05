@@ -17,15 +17,18 @@ const MessageParser = ({ children, actions }) => {
         actions.handleEmpty();
     }
 
-    if (message.includes('dog')) {
-      actions.handleDog();
-    }
+    // if (message.includes('dog')) {
+    //   actions.handleDog();
+    // }
     
     if (message.includes('anime')){
       actions.handleAnime();
     }
 
+    actions.handleUnknown()
     console.log(message);
+
+
   };
 
   return (
