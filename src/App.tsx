@@ -3,6 +3,7 @@ import routes from './config/routes'
 import Navbar from './components/Navbar'
 import { Provider } from 'react-redux'
 import { store } from './redux/store'
+import Robocop from './components/Robocop'
 
 import AuthChecker from './auth/AuthChecker'
 
@@ -30,6 +31,7 @@ function App() {
                 />))
             }
           </Routes>
+          <Robocop />
         </Provider>
     </HashRouter>
   )

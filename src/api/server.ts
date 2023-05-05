@@ -1,4 +1,4 @@
-import {token} from './token'
+import { token, setToken } from './token'
 
 export const server_calls = {
     get: async() => {
@@ -9,10 +9,10 @@ export const server_calls = {
             headers: {
                 'Content-Type': 'application/json',
                 'access-control-allow-origin':	'*',
-                'x-access-token': `${token}`,
+                'x-access-token': `Bearer ${token}`,
             },
         })   
-
+        
         if (!response.ok){
             throw new Error('Failed to fetch data from the server')
         }
@@ -27,7 +27,7 @@ export const server_calls = {
             headers: {
                 'Content-Type': 'application/json',
                 'access-control-allow-origin':	'*',
-                'x-access-token': `${token}`,
+                'x-access-token': `Bearer ${token}`,
             },
             body: JSON.stringify(data)
         })
@@ -45,7 +45,7 @@ export const server_calls = {
             method: "POST",
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': `${token}`,
+                'x-access-token': `Bearer ${token}`,
             },
             body: JSON.stringify(data)
         })
@@ -63,7 +63,7 @@ export const server_calls = {
             method: "DELETE",
             headers: {
                 'Content-Type': 'application/json',
-                'x-access-token': `${token}`,
+                'x-access-token': `Bearer ${token}`,
             }
         })
 

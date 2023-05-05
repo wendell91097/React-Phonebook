@@ -4,7 +4,7 @@ import MultiLineInput from "./MultiLine_Input"
 
 import { useForm } from 'react-hook-form'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 import { Rating } from "@mui/material"
 import { server_calls } from "../api/server"
@@ -15,11 +15,41 @@ interface ReviewFormProps {
   id?: string[],
 }
 
+const labels: { [index: number]: string } = {
+  0: 'Worthless!',
+  1: 'Poor...',
+  2: 'Okay',
+  3: 'Good',
+  4: 'Great',
+  5: 'Excellent!',
+};
+
+interface RatingProps {
+  rating : number
+}
+
+
+function RatingToString({ rating }: RatingProps) {
+  const [stringValue, setStringValue] = useState('');
+  // Update the string value whenever the number changes
+  if(rating === null){
+    useEffect(() => {
+      setStringValue(labels[0] || '');
+    }, [0]);
+  }else{
+    useEffect(() => {
+      setStringValue(labels[rating] || '');
+    }, [rating]);
+  }
+  return <div>{stringValue}</div>
+}
+
 function ReviewForm( props: ReviewFormProps ) {
   const { register, handleSubmit } = useForm({})
   const dispatch = useDispatch();
   const store = useStore();
   const [value, setValue] = useState<number | null >(1);
+  const [ratingvalue] = useState<number>(1)
 
   const onSubmit = ( data: any, event: any) => {
     console.log(`ID: ${props.id}`);
@@ -66,9 +96,13 @@ function ReviewForm( props: ReviewFormProps ) {
                 onChange={(event, newValue) => {
                   setValue(newValue);
                 }}
-              
               />
             </div>
+            {value !== null && (
+              <div className="pl-2">
+                <RatingToString rating={value} />
+              </div>
+              )}
           </div>
           <div className="flex flex-col px-4 justify-self-end">
             <div>
