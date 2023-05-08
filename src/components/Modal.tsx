@@ -1,6 +1,5 @@
 import React from 'react'
 import ReviewForm from './InfoForm';
-import ReviewFormPrivate from './InfoFormPrivate';
 
 type Props = {
     id?: string[];
