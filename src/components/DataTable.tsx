@@ -115,13 +115,13 @@ function DataTable() {
         </div>
       </div>
       <div className={ open ? "hidden" : "container px-5 py-5 flex flex-col" }
-        style={{ height: 560, width: '100%' }}
+        style={{ height: 450, width: '100%' }}
       >
         <h2 className='p-3 bg-slate-300 my-3 rounded'>Opinions with Factual Support</h2>
         <DataGrid
           rows={ reviewData }
           columns={columns}
-          rowsPerPageOptions={[5]}
+          rowsPerPageOptions={[5, 10, 25, 100]}
           checkboxSelection={true} 
           onSelectionModelChange={(item:any) => {
             setSelectionModel(item)

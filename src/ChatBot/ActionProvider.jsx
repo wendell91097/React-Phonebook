@@ -57,7 +57,7 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
   }
 
   const handleUnknown = () => {
-    const botMessage = createChatBotMessage("My apologies, but I don't understand you. I reply to 'hello', 'anime' or 'thanks'. And yes, I AM case sensitive- I'm not ashamed to admit it.")
+    const botMessage = createChatBotMessage("My apologies, but I don't understand you. I reply to 'hello', 'anime', 'thanks', 'dashboard', 'review', 'token' or 'private'. And yes, I AM case sensitive- I'm not ashamed to admit it.")
 
     setState((prev) => ({
       ...prev,
@@ -97,6 +97,46 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
         )}
     )
   }
+
+  const handleDashboard = () => {
+    const botMessage = createChatBotMessage("The Dashboard allows users to create, store and share reviews. The 3 main features are the tokens, private mode, and review management.")
+    setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, botMessage]
+      }))
+    }
+    
+  const handleTokens = () => {
+    const botMessage = createChatBotMessage("Tokens are the keys that allow users to safeguard their reviews. Once a unique key is added, nobody can see your private reviews or edit your public reviews.")
+    setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, botMessage]
+      }))
+  }
+
+  const handleReviews = () => {
+    const botMessage = createChatBotMessage("Anyone can post a review without needing a unique key. Be warned, however, those reviews can be altered by anybody.")
+    setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, botMessage]
+      }))
+  }
+
+  const handlePrivate = () => {
+    const botMessage = createChatBotMessage("Private mode allows users to access a review database specific to their key.")
+    setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, botMessage]
+      }))
+  }
+
+  const handleHelp = () => {
+    const botMessage = createChatBotMessage("I have a couple of commands: 'dashboard', 'private', 'token', 'review' all provide info on this website and 'anime' will generate a random anime quote.")
+    setState((prev) => ({
+        ...prev,
+        messages: [...prev.messages, botMessage]
+      }))
+  }
   
   
   return (
@@ -108,6 +148,11 @@ const ActionProvider = ({ createChatBotMessage, setState, children }) => {
             handleThanks,
             handleEmpty,
             handleUnknown,
+            handleDashboard,
+            handleReviews,
+            handleTokens,
+            handlePrivate,
+            handleHelp,
             // handleDog,
             handleAnime,
           },

@@ -1,5 +1,3 @@
-//Determines which actions Robocop is to pass when prompted
-
 import React from 'react';
 
 const MessageParser = ({ children, actions }) => {
@@ -20,14 +18,32 @@ const MessageParser = ({ children, actions }) => {
         unknown = false  
         actions.handleEmpty();
     }
-
-    // if (message.includes('dog')) {
-    //   actions.handleDog();
-    // }
     
     if (message.includes('anime')){
         unknown = false  
         actions.handleAnime();
+    }
+    if (message.includes('dashboard')){
+        unknown = false  
+        actions.handleDashboard();
+    }
+    if (message.includes('token')){
+        unknown = false  
+        actions.handleTokens();
+    }
+    if (message.includes('review')){
+        unknown = false  
+        actions.handleReviews();
+    }
+
+    if (message.includes('private')){
+        unknown = false  
+        actions.handlePrivate();
+    }
+
+    if (message.includes('help')){
+        unknown = false
+        actions.handleHelp()
     }
 
     if(unknown === true){

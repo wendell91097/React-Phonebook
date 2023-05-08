@@ -3,7 +3,7 @@
     bottom: 18px;
     right: 20px;
     margin: 10px;
-    z-index: 2;
+    z-index: 4001;
     transform: rotate(180deg)
   }
   
@@ -150,7 +150,7 @@
     right: 0;
     bottom: 0;
     margin: 10px;
-    z-index: 1;
+    z-index: 4000;
     border: 1px solid #1d1d1d;
     border-radius: 5px;
   }

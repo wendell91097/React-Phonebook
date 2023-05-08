@@ -39,6 +39,8 @@ function Dashboard() {
     setSavedTokens(newTokens);
   }
 
+  let tokenSelect = 'Select'
+
   
 
   return (
@@ -50,27 +52,32 @@ function Dashboard() {
             value={token}
             onChange={(event) => setToken(event.target.value)}
           />
-          <div className="pt-2"><Button type="submit">Submit</Button></div>
+          <div className="pt-2 flex justify-start"><Button type="submit">Submit</Button></div>
         </form>
         <TextField
-          select
-          label="Saved Tokens"
-          value={token}
-          sx={{ width: "210px",
-         }}
-          onChange={(event) => setToken(event.target.value)}
-        >
-          {savedTokens.map((token) => (
-            <MenuItem key={token} value={token}>
-              <div className="flex flex-row">
-                {token}
-                <div className="cursor-pointer hover:text-red-500" onClick={() => handleTokenDelete(token)}>
-                  <Delete />
-                </div>
-              </div>
-            </MenuItem>
-          ))}
-        </TextField>
+              select
+              label="Saved Tokens"
+              value={token}
+              sx={{ width: "210px" }}
+              onChange={(event) => {
+                setToken(event.target.value);
+                refreshPageHalfSecond();
+              }}
+            >
+              {savedTokens.map((token) => (
+                <MenuItem key={token} value={token}>
+                  <div className="flex flex-row">
+                    {token}
+                    <div
+                      className="cursor-pointer hover:text-red-500"
+                      onClick={() => handleTokenDelete(token)}
+                    >
+                      <Delete />
+                    </div>
+                  </div>
+                </MenuItem>
+              ))}
+            </TextField>
         <div className="flex flex-col sm:flex-row">
           <div className="pt-3 pl-3 max-h-7">Need a token?</div>
           <div className="mt-7 sm:mt-3 pl-3 max-h-7 text-indigo-600 hover:text-indigo-300" id='FlaskLink'>
