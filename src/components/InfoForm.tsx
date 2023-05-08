@@ -3,6 +3,7 @@ import Input from "./Input"
 import MultiLineInput from "./MultiLine_Input"
 
 import { useForm } from 'react-hook-form'
+import { useToken } from "../custom-hooks/Token"
 
 import { useState, useEffect } from "react"
 
@@ -13,6 +14,7 @@ import { chooseShow, chooseAuthor, chooseRating, chooseReview } from '../redux/s
 
 interface ReviewFormProps {
   id?: string[],
+  privacy: boolean;
 }
 
 const labels: { [index: number]: string } = {
@@ -45,11 +47,11 @@ function RatingToString({ rating }: RatingProps) {
 }
 
 function ReviewForm( props: ReviewFormProps ) {
+  const token = useToken('073fa25327a3f5cfc8b14ef75666dcd27c2986fb4de9248a')
   const { register, handleSubmit } = useForm({})
   const dispatch = useDispatch();
   const store = useStore();
-  const [value, setValue] = useState<number | null >(1);
-  const [ratingvalue] = useState<number>(1)
+  const [value, setValue] = useState<number | null >(1)
 
   const onSubmit = ( data: any, event: any) => {
     console.log(`ID: ${props.id}`);
@@ -62,13 +64,15 @@ function ReviewForm( props: ReviewFormProps ) {
     dispatch(chooseRating(rating));
     dispatch(chooseReview(data.review))
 
+    
+
     if(props.id && props.id.length > 0) {
-      server_calls.update(props.id[0], store.getState())
+      server_calls.update(props.id[0], store.getState(), props.privacy, token.token)
       console.log(`Updated: ${data.show} , ${props.id}`)
       setTimeout(() => {window.location.reload()}, 500);
       event.target.reset()
     } else {
-      server_calls.create(store.getState());
+      server_calls.create(store.getState(), props.privacy, token.token);
       setTimeout(() => {window.location.reload()}, 500);
     }
   }

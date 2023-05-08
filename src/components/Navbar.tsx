@@ -55,12 +55,6 @@ function Navbar() {
                             mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">About</Link>
                         </div>
                     </Button>
-                    <Button className="p-3 m-5 bg-indigo-400 justify-center rounded-xl shadow-xl">
-                        <div>
-                            <Link to="/contact" onClick={ clicked } className="flex place-items-center 
-                            mt-4 lg:inline-block lg:mt-0 text-cyan-200 hover:text-white mr-4">Contact</Link>
-                        </div>
-                    </Button>
                     {
                         !auth.currentUser ?
 

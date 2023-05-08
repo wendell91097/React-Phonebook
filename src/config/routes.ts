@@ -1,7 +1,6 @@
 import Home from '../pages/Home';
 import About from '../pages/About';
 import Dashboard from '../pages/Dashboard';
-import Contact from '../pages/Contact'
 
 interface RouteType {
     path : string,

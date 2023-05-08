@@ -3,11 +3,17 @@ import { TextField, Button, MenuItem } from '@mui/material';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Delete } from '@mui/icons-material';
-import { setToken } from "../api/token";
+import { useToken } from '../custom-hooks/Token';
 
 function Dashboard() {
+
+  function refreshPageHalfSecond() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 500); 
+  }
   
-  const [token, setUserToken] = useState('');
+  const { token, setToken, saveToken, deleteToken } = useToken('073fa25327a3f5cfc8b14ef75666dcd27c2986fb4de9248a');
   const [savedTokens, setSavedTokens] = useState<string[]>([]);
 
   useEffect(() => {
@@ -22,11 +28,9 @@ function Dashboard() {
     if (token.trim() === '') {
       return; 
     }
-    const newTokens = [...savedTokens, token];
-    localStorage.setItem('userTokens', JSON.stringify(newTokens));
-    setSavedTokens(newTokens);
-    setUserToken('');
-    
+    saveToken(token);
+    setToken(token);
+    refreshPageHalfSecond();
   }
 
   const handleTokenDelete = (tokenToDelete: string) => {
@@ -35,15 +39,16 @@ function Dashboard() {
     setSavedTokens(newTokens);
   }
 
+  
+
   return (
     <div>
-      
-      <div className="flex flex-row p-2 m-2 text-center">
+      <div className="flex flex-row p-5 text-center bg-gradient-to-r from-white to-sky-100 text-slate-800">
         <form onSubmit={handleTokenSubmit} className='px-3'>
           <TextField
             label="Enter Token"
             value={token}
-            onChange={(event) => setUserToken(event.target.value)}
+            onChange={(event) => setToken(event.target.value)}
           />
           <div className="pt-2"><Button type="submit">Submit</Button></div>
         </form>
@@ -51,8 +56,9 @@ function Dashboard() {
           select
           label="Saved Tokens"
           value={token}
-          sx={{ width: "205px" }}
-          onChange={(event) => setUserToken(event.target.value)}
+          sx={{ width: "210px",
+         }}
+          onChange={(event) => setToken(event.target.value)}
         >
           {savedTokens.map((token) => (
             <MenuItem key={token} value={token}>
@@ -73,12 +79,10 @@ function Dashboard() {
             </Link>
           </div>
         </div>
-        
       </div>
       <DataTable />
-      <div className='h-12'></div>
+      <div className='h-12 bg-gradient-to-r from-white to-sky-100'></div>
     </div>
-   
   )
 }
 

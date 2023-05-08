@@ -4,16 +4,20 @@ import React from 'react';
 
 const MessageParser = ({ children, actions }) => {
   const parse = (message) => {
+    let unknown = true
     console.log(message)
     if (message.includes('hello')){ 
+      unknown = false  
       actions.handleHello();
     }
 
     if (message.includes('thank')){ 
+        unknown = false  
         actions.handleThanks();
       }
 
     if (message.length === 0){
+        unknown = false  
         actions.handleEmpty();
     }
 
@@ -22,10 +26,13 @@ const MessageParser = ({ children, actions }) => {
     // }
     
     if (message.includes('anime')){
-      actions.handleAnime();
+        unknown = false  
+        actions.handleAnime();
     }
 
-    actions.handleUnknown()
+    if(unknown === true){
+        actions.handleUnknown()
+        }
     console.log(message);
 
 

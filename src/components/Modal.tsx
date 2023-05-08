@@ -5,6 +5,7 @@ import ReviewFormPrivate from './InfoFormPrivate';
 type Props = {
     id?: string[];
     open: boolean;
+    privacy: boolean;
     onClose: () => void;
 
 }
@@ -33,7 +34,7 @@ const Modal = ( props: Props) => {
                         <ReviewFormPrivate id={ props.id } />
                     </div> */}
                     <div className="flex items-center text-center my-3 p-1">
-                        <ReviewForm id={ props.id }/>
+                        <ReviewForm id={ props.id } privacy = { props.privacy}/>
                     </div>
                 </div>
             </div>

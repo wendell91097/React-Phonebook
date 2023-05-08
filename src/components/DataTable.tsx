@@ -4,7 +4,9 @@ import Modal from './Modal'
 import { server_calls } from '../api/server';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { useGetData } from '../custom-hooks/FetchData';
-import { Rating } from '@mui/material';
+import { Rating, FormControlLabel, Switch } from '@mui/material';
+import { usePrivacyToggle } from '../custom-hooks/PrivacyToggle';
+import { useToken } from '../custom-hooks/Token';
 
 const labels: { [index: number]: string } = {
   0: 'Worthless!',
@@ -51,9 +53,13 @@ const columns: GridColDef[] = [
   { field: 'review', headerName: 'Review', flex: 20,}
 ]
 
+
 function DataTable() {
+  const token = useToken('073fa25327a3f5cfc8b14ef75666dcd27c2986fb4de9248a')
   const [ open, setOpen ] = useState(false);
-  const { reviewData, getData } = useGetData();
+  const [ showPrivateReviews, setShowPrivateReviews] = useState(false);
+  const { privacy, togglePrivacy } = usePrivacyToggle(false, setShowPrivateReviews);
+  const { reviewData, getData } = useGetData(privacy, token.token);
   const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
   const handleOpen = () => {
@@ -64,50 +70,65 @@ function DataTable() {
     setOpen(false)  
   }
     
-
   const deleteData = () => {
     for(let i = 0; i < selectionModel.length; i++){
-      server_calls.delete(selectionModel[i]);
+      server_calls.delete(selectionModel[i], privacy, token.token);
     }
     getData();
     console.log(`Selection model: ${selectionModel}`) 
     setTimeout(() => {window.location.reload()}, 500)
   }
     
-
   return (
-    <>
-        <Modal
-            id= { selectionModel }
-            open={ open } 
-            onClose={ handleClose }
-         /> 
-        <div className='flex flex-row px-3 pt-2 pb-1'>
-            <div>
-                <button
-                className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'
-                onClick={() => handleOpen()}>
-                    Add Review   
-                
-                </button>
-            </div>
-            <Button onClick={ handleOpen } className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'>Update</Button>
-            <Button onClick={ deleteData } className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'>Delete</Button>
-        </div>
-        <div className={ open ? "hidden" : "container px-5 py-5 flex flex-col" }
-             style={{ height: 560, width: '100%' }}
+    <div className='bg-gradient-to-r from-white to-sky-100'>
+      <Modal
+        id={ selectionModel }
+        open={ open } 
+        privacy={ privacy }
+        onClose={ handleClose }
+      /> 
+      <div className='flex flex-row px-3 pt-2 pb-1'>
+        <div>
+          <button
+            className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'
+            onClick={() => handleOpen()}
           >
-            <h2 className='p-3 bg-slate-300 my-3 rounded'>Opinions with Factual Support</h2>
-            <DataGrid rows={ reviewData } columns={columns} rowsPerPageOptions={[5]}
-            checkboxSelection={true} 
-            
-            onSelectionModelChange={(item:any) => {
-              setSelectionModel(item)
-            }}
-            />
-
+            Add Review   
+          </button>
         </div>
-    </>
+        <Button onClick={ handleOpen } className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'>
+          Update
+        </Button>
+        <Button onClick={ deleteData } className='p-3 m-3 bg-slate-300 rounded-xl shadow-xl hover:bg-slate-800 hover:text-white'>
+          Delete
+        </Button>
+        <div className="flex items-center">
+          <FormControlLabel
+            control={
+              <Switch
+                checked={privacy}
+                onChange={togglePrivacy}
+              />
+            }
+            label="Private Mode"
+          />
+        </div>
+      </div>
+      <div className={ open ? "hidden" : "container px-5 py-5 flex flex-col" }
+        style={{ height: 560, width: '100%' }}
+      >
+        <h2 className='p-3 bg-slate-300 my-3 rounded'>Opinions with Factual Support</h2>
+        <DataGrid
+          rows={ reviewData }
+          columns={columns}
+          rowsPerPageOptions={[5]}
+          checkboxSelection={true} 
+          onSelectionModelChange={(item:any) => {
+            setSelectionModel(item)
+          }}
+        />
+      </div>
+    </div>
   )
 }
 
